@@ -1,0 +1,21 @@
+#! /bin/bash
+# author: tom.sandholm@gmail.com
+# date: Mon May 29 13:33:34 EDT 2017
+
+## install systemd control scripts
+systemctl stop wildfly.service
+systemctl disable wildfly.service
+
+rm /lib/systemd/system/wildfly.service
+rm -rf /etc/wildfly
+
+## reconfigure systemd
+systemctl daemon-reload
+
+cd /opt
+rm -rf wildfly*
+
+## all done
+exit 0
+
+

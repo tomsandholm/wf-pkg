@@ -1,0 +1,41 @@
+#! /bin/bash
+# author: tom.sandholm@gmail.com
+# date: Mon May 29 13:33:34 EDT 2017
+
+
+cd /opt
+rm -f wildfly
+ln -s wildfly-*.Final wildfly
+
+## ensure wildfly group exists
+if grep wildfly /etc/group > /dev/null
+then
+	:
+else
+	groupadd wildfly
+fi
+
+## ensure user wildfly exists
+id wildfly || useradd wildfly -g wildfly -d /opt/wildfly
+echo "set ownership of /opt/wildfly"
+chown -R wildfly:jwildfly /opt/wildfly/
+
+## install systemd control script
+cp /opt/wildfly/systemd/wildfly.service /lib/systemd/system/
+mkdir -p /etc/wildfly
+cp /opt/wildfly/etc/wildfly/wildfly.conf /etc/wildfly/wildfly.conf
+chown -R wildfly:wildfly /etc/wildfly
+
+
+## reconfigure systemd
+systemctl daemon-reload
+
+## enable as boot-enabled
+## need to pick one
+systemctl enable wildfly.service
+systemctl start wildfly.service
+
+## all done
+exit 0
+
+
