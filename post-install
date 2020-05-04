@@ -18,7 +18,7 @@ fi
 ## ensure user wildfly exists
 id wildfly || useradd wildfly -g wildfly -d /opt/wildfly
 echo "set ownership of /opt/wildfly"
-chown -R wildfly:jwildfly /opt/wildfly/
+chown -R wildfly:wildfly /opt/wildfly/
 
 ## install systemd control script
 cp /opt/wildfly/systemd/wildfly.service /lib/systemd/system/
