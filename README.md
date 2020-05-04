@@ -1,0 +1,2 @@
+# wf-pkg
+Wildfly package
