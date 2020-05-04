@@ -35,9 +35,12 @@ define setup
 	tar xfz `basename $(1)`
 	mkdir -p $(2)/systemd
 	mkdir -p $(2)/etc/wildfly
+	mkdir -p $(2)/properties
 	cp $(2)/docs/contrib/scripts/systemd/wildfly.service $(2)/systemd/
 	cp $(2)/docs/contrib/scripts/systemd/wildfly.conf $(2)/etc/wildfly
 	cp $(2)/docs/contrib/scripts/systemd/launch.sh $(2)/bin/
+	cp $(2)/mgmt-groups.properties $(2)/standalone/configuration/
+	cp $(2)/mgmt-users.properties $(2)/standalone/configuration/
 	fpm -v $(3) --deb-no-default-config-files --description "$(2)" -d $(4) -s dir -t deb -n $(NAME) --prefix $(TARGET) --after-install post-install --after-remove post-uninstall $(2)
 endef
 

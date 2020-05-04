@@ -26,7 +26,6 @@ mkdir -p /etc/wildfly
 cp /opt/wildfly/etc/wildfly/wildfly.conf /etc/wildfly/wildfly.conf
 chown -R wildfly:wildfly /etc/wildfly
 
-
 ## reconfigure systemd
 systemctl daemon-reload
 
